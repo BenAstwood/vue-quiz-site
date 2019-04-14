@@ -20,6 +20,23 @@ export default {
   components: {
     Header,
     QuestionBox
+  },
+  data() {
+    return {
+      questions: []
+    };
+  },
+  mounted: function() {
+    fetch(
+      "https://opentdb.com/api.php?amount=10&category=22&difficulty=easy&type=multiple",
+      {
+        method: "get"
+      }
+    )
+      .then(res => res.json())
+      .then(jsonData => {
+        this.questions = jsonData.results;
+      });
   }
 };
 </script>
